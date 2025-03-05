@@ -57,7 +57,8 @@ function createSchema(req, res, next) {
         password: Joi.string().min(6).required(),
         confirmPassword: Joi.string().valid(Joi.ref('password')).required()
     });
-    validateRequest(req, res, next, schema);
+
+    return validateRequest(req, next, schema);
 }
 
 function updateSchema(req, res, next) {
@@ -71,5 +72,5 @@ function updateSchema(req, res, next) {
         confirmPassword: Joi.string().valid(Joi.ref('password')).empty("")
     }).with("password", "confirmPassword");
     
-    validateRequest(req, res, next, schema);
+    return validateRequest(req, res, next, schema);
 }
